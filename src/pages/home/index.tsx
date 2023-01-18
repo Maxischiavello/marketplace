@@ -1,18 +1,15 @@
 import { Button, Container } from "@mui/material"
-import { useNotification } from "../../context/notification.context"
+import { HeaderComponent } from "../../components/Header"
 
 export const HomePage: React.FC<{}> = () => {
-    const { getError } = useNotification()
-
-    const handleClick = () => {
-        getError("Tienes un error")
-    }
 
     return (
         <Container sx={{ mt: 9 }} maxWidth='xl'>
-            <Button fullWidth variant='contained' onClick={handleClick}>
-                Estamos en Home
-            </Button>
+            <HeaderComponent 
+                title="titulo"
+                description="descripcion"
+                element={<Button fullWidth variant="contained">button</Button>}
+            />
         </Container>
     )
 }
