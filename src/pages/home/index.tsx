@@ -9,6 +9,7 @@ export const HomePage: React.FC<{}> = () => {
     const [loading, setLoading] = React.useState<boolean>(true)
 
     React.useEffect(() => {
+        setLoading(true)
         characters
             .getAll({ page: 1 })
             .then((r) => {
@@ -34,7 +35,7 @@ export const HomePage: React.FC<{}> = () => {
                 <div>
                     {
                         allCharacters?.length !== 0 ? (
-                            <Grid container spacing={2} direction="row">
+                            <Grid sx={{ my: 2 }} container spacing={2} direction="row">
                                 {allCharacters!.map((character) => (
                                     <Grid item xs={3}>
                                         <CardComponent
