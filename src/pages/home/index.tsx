@@ -1,45 +1,52 @@
-import React from "react"
+import React from "react";
 import {
     Box,
     Button,
     CircularProgress,
     Container,
     Grid,
-    Pagination
-} from "@mui/material"
-import { characters } from "../../api/characters"
-import { TypeCharacter } from "./interface/character.interface"
-import { CardComponent, HeaderComponent } from "../../components"
+    Pagination,
+} from "@mui/material";
+import { CardComponent, HeaderComponent } from "../../components";
+import { characters } from "../../api/characters";
+import { TypeCharacter } from "./interface/character.interface";
 
-export const HomePage: React.FC<{}> = () => {
-    const [allCharacters, setAllCharacters] = React.useState<TypeCharacter[] | null>(null)
-    const [page, setPage] = React.useState(1)
-    const [count, setCount] = React.useState(1)
-    const [loading, setLoading] = React.useState<boolean>(true)
+export const HomePage: React.FC = () => {
+    const [page, setPage] = React.useState(1);
+    const [count, setCount] = React.useState(1);
+    const [allCharacters, setAllCharacters] = React.useState<
+        TypeCharacter[] | null
+    >(null);
+    const [loading, setLoading] = React.useState<boolean>(true);
 
     React.useEffect(() => {
-        setLoading(true)
+        setLoading(true);
         characters
             .getAll({ page })
             .then((r) => {
-                setCount(r.data.info.pages)
-                setAllCharacters(r.data.results)
-                setTimeout(() => setLoading(false), 1000)
-            }).catch((error) => {
-                console.log(error)
+                setCount(r.data.info.pages);
+                setAllCharacters(r.data.results);
+                setTimeout(() => setLoading(false), 1000);
             })
-    }, [page])
+            .catch((e) => {
+                console.error(e);
+            });
+    }, [page]);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPage(value)
-    }
+        setPage(value);
+    };
 
     return (
-        <Container sx={{ mt: 9 }} maxWidth='xl'>
+        <Container maxWidth="xl">
             <HeaderComponent
-                title="titulo"
-                description="descripcion"
-                element={<Button fullWidth variant="contained">button</Button>}
+                title="Marketplace"
+                description="Marketplace - Rick and Morty"
+                element={
+                    <Button fullWidth variant="contained">
+                        Hola mundo
+                    </Button>
+                }
             />
             {loading ? (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
@@ -48,37 +55,39 @@ export const HomePage: React.FC<{}> = () => {
             ) : (
                 <>
                     <div>
-                        {
-                            allCharacters?.length !== 0 ? (
-                                <Grid sx={{ my: 2 }} container spacing={2} direction="row">
-                                    {allCharacters!.map((character) => (
-                                        <Grid item xs={3}>
-                                            <CardComponent
-                                                key={character.id}
-                                                image={character.image}
-                                                name={character.name}
-                                                species={character.species}
-                                                status={character.status}
-                                                id={character.id}
-                                            />
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                            ) : "There is no data."
-                        }
+                        {allCharacters!.length !== 0 ? (
+                            <Grid sx={{ my: 2 }} container spacing={2} direction="row">
+                                {allCharacters!.map((character) => (
+                                    <Grid key={character.id} item xs={3}>
+                                        <CardComponent
+                                            image={character.image}
+                                            name={character.name}
+                                            species={character.species}
+                                            status={character.status}
+                                            id={character.id}
+                                        />
+                                    </Grid>
+                                ))}
+                            </Grid>
+                        ) : (
+                            "No data"
+                        )}
                     </div>
-                    <Box sx={{ width: "100%", display: "flex", justifyContent: "center", mb: 3 }}>
+                    <Box
+                        sx={{ width: "100%", display: "flex", justifyContent: "center" }}
+                    >
                         <Pagination
+                            variant="outlined"
+                            color="primary"
                             count={count}
                             page={page}
                             onChange={handleChange}
-                            variant="outlined"
-                            color="primary"
+                            sx={{ mb: 3 }}
                             size="large"
                         />
                     </Box>
                 </>
             )}
         </Container>
-    )
-}
+    );
+};
