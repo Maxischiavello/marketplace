@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { characters } from "../../api/characters";
 import { ICharacter } from "./interface/character.interface";
 
-export const CharacterPage: React.FC = () => {
+const CharacterPage: React.FC = () => {
     const { id } = useParams();
 
     const [loading, setLoading] = React.useState<boolean>(true);
@@ -21,7 +21,7 @@ export const CharacterPage: React.FC = () => {
 
     return (
         <Box sx={{ width: "100%" }}>
-            <Container maxWidth="xl">
+            <Container maxWidth="md">
                 {loading ? (
                     <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
                         <CircularProgress />
@@ -29,9 +29,11 @@ export const CharacterPage: React.FC = () => {
                 ) : (
                     <Grid sx={{ mt: 2 }} container columnSpacing={2}>
                         <Grid item xs={6}>
-                            <Typography variant='h1' >{character!.name}</Typography>
+                            <Typography variant='h3' >{character!.name}</Typography>
                             <Divider />
-                            <Typography variant="h6">{character!.origin.name}</Typography>
+                            <Typography variant="h6">Origen: {character!.origin.name}</Typography>
+                            <Typography variant="h6">Genero: {character!.gender}</Typography>
+                            <Typography variant="h6">Especie: {character!.species}</Typography>
                             <Box sx={{ mt: 2 }}>
                                 <Chip color="primary" variant="outlined" label={character!.status} />
                             </Box>
@@ -45,3 +47,5 @@ export const CharacterPage: React.FC = () => {
         </Box>
     );
 };
+
+export default CharacterPage

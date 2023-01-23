@@ -1,7 +1,6 @@
 import React from "react";
 import {
     Box,
-    Button,
     CircularProgress,
     Container,
     Grid,
@@ -41,11 +40,10 @@ export const HomePage: React.FC = () => {
         <Container maxWidth="xl">
             <HeaderComponent
                 title="Marketplace"
-                description="Marketplace - Rick and Morty"
-                element={
-                    <Button fullWidth variant="contained">
-                        Hola mundo
-                    </Button>
+                description="Rick and Morty"
+                element={undefined
+                    // le paso un elemento a un componente
+                    //<Button fullWidth variant="contained">Hola mundo</Button>
                 }
             />
             {loading ? (
@@ -58,7 +56,7 @@ export const HomePage: React.FC = () => {
                         {allCharacters!.length !== 0 ? (
                             <Grid sx={{ my: 2 }} container spacing={2} direction="row">
                                 {allCharacters!.map((character) => (
-                                    <Grid key={character.id} item xs={3}>
+                                    <Grid key={character.id} item xs={12} sm={6} md={4} lg={3}>
                                         <CardComponent
                                             image={character.image}
                                             name={character.name}

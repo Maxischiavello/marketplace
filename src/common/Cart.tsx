@@ -24,7 +24,7 @@ export const CartComponent: React.FC<CartComponentProps> = ({
 
     return (
         <Drawer anchor={'right'} open={open}>
-            <Box sx={{ width: '25em', p: 2 }}>
+            <Box sx={{ width: '22em', p: 2 }}>
                 <Stack
                     direction="row"
                     justifyContent="space-between"

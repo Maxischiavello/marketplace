@@ -57,8 +57,8 @@ export const CardComponent: React.FC<CardProps> = ({
           {name}
         </Typography>
         <Divider />
-        <Typography sx={{ mt: 1.5 }}>Especie: {species}</Typography>
-        <Typography sx={{ mt: 1.5 }}>Estado: {status}</Typography>
+        <Typography variant="body2" sx={{ mt: 1.5 }}>Especie: {species}</Typography>
+        <Typography variant="body2" sx={{ mt: 1.5 }}>Estado: {status}</Typography>
       </CardContent>
       <CardActions>
         <Button
@@ -67,7 +67,7 @@ export const CardComponent: React.FC<CardProps> = ({
           size="small"
           onClick={() => navigate(`/character/${id}`)}
         >
-          Learn More
+          Mas info
         </Button>
         <Button
           fullWidth
@@ -76,7 +76,7 @@ export const CardComponent: React.FC<CardProps> = ({
           disabled={disabledBtn}
           onClick={handleAddToCart}
         >
-          Add to cart
+          Agregar al carrito
         </Button>
       </CardActions>
     </Card>
